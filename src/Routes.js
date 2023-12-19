@@ -1,4 +1,4 @@
-const FareController = require("./controllers/FareController")
+const FareController = require("./model_deployment/controllers/FareController")
 
 class Routes {
     constructor(server){
