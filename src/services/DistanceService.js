@@ -1,9 +1,11 @@
 const axios = require('axios');
+const dotenv = require('dotenv');
 
 class DistanceService {
-    constructor(server) {
-        this.server = server
-        this.apiKey = this.server.env.GOOGLE_API_KEY;
+    constructor() {
+        dotenv.config()
+        this.env = process.env
+        this.apiKey = this.env.GOOGLE_API_KEY;
     }
 
     async getDistance(orgLat, orgLng, dLat, dLng) {

@@ -3,11 +3,10 @@ const FareService = require("../services/FareService");
 const ScraperService = require("../services/ScraperService");
 
 class FareController {
-    constructor(server){
-        this.server = server
+    constructor(){
         this.FareService = new FareService()
         this.ScraperService = new ScraperService()
-        this.DistanceService = new DistanceService(this.server)
+        this.DistanceService = new DistanceService()
     }
 
     async getFare(req, res){
