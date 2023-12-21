@@ -61,7 +61,7 @@ class ScraperService {
     }
 
     scheduleDailyUpdate() {
-        cron.schedule('*/15 * * * * *', async () => {
+        cron.schedule('0 0 * * *', async () => {
             const currentTime = new Date().toISOString();
             await this.updateFuelPrice();
             console.log(`FUEL PRICE UPDATED at ${currentTime}`);
