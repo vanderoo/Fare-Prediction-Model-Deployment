@@ -14,23 +14,32 @@ class FareService {
         ];
 
         const fuelPriceNormalized = (fuelPrice - normParams.mean_X.BBM) / normParams.std_X.BBM;
+        const fuelDistance = fuelPrice * distance
+        const fuelDistanceNormalized = (fuelDistance - normParams.mean_X.BBM_Distance) / normParams.std_X.BBM_Distance;
 
         const modelPath = path.join(__dirname, '..', 'fare_model', 'model.json');
         const model = await tf.loadLayersModel(`file://${modelPath}`);
 
         const input = tf.tensor2d(
-            [[distanceNormalized, fuelPriceNormalized, ...typeNormalized]],
-            [1, 2 + typeNormalized.length]
+            [[distanceNormalized, fuelPriceNormalized, fuelDistanceNormalized, ...typeNormalized]],
+            [1, 3 + typeNormalized.length]
         );
-        const result = model.predict(input);
-
+        
+        try {
+         
+        const result =  model.predict(input);
         const resultDenormalized = tf.add(tf.mul(result, normParams.std_y), normParams.mean_y);
 
         const resultValues = resultDenormalized.dataSync();
 
         const roundedValues = resultValues.map(value => Math.round(value / 1000) * 1000);
 
-        return roundedValues[0];
+        return roundedValues[0];   
+        } catch (error) {
+            console.log("ERROR")
+        }
+
+        
     }
 
 }
