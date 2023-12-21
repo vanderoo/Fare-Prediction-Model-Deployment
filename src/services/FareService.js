@@ -15,7 +15,7 @@ class FareService {
 
         const fuelPriceNormalized = (fuelPrice - normParams.mean_X.BBM) / normParams.std_X.BBM;
         const fuelDistance = fuelPrice * distance
-        const fuelDistanceNormalized = (fuelDistance - normParams.mean_X.BBM_Distance) / normParams.std_X.BBM_Distance;
+        const fuelDistanceNormalized = (fuelDistance - normParams.mean_X.Distance_BBM) / normParams.std_X.Distance_BBM;
 
         const modelPath = path.join(__dirname, '..', 'fare_model', 'model.json');
         const model = await tf.loadLayersModel(`file://${modelPath}`);
