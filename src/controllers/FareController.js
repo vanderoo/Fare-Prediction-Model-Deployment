@@ -25,7 +25,7 @@ class FareController {
 
             const fuelPrice = await this.ScraperService.getFuelPriceFromFile()
             
-            const fare = await this.FareService.getFare(1000, passengerType, fuelPrice)
+            const fare = await this.FareService.getFare(distance, passengerType, fuelPrice)
 
             return res.status(200).json({
                 status: 'OK',
